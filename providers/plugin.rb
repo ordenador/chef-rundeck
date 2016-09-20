@@ -20,23 +20,23 @@
 #
 
 action :create do
-	plugin_filename = ::File.basename(new_resource.url)
-	Chef::Application.fatal!("Invalid filename extension for Rundeck plugin #{new_resource.name}") \
-		if ! (::File.extname(plugin_filename).eql?('.zip') || ::File.extname(plugin_filename).eql?('.jar'))
-	a = remote_file "/var/lib/rundeck/libext/#{new_resource.name}" do
-	  owner 'rundeck'
-	  group 'rundeck'
-	  mode 00644
-	  action :create
-	  source new_resource.url
-	  checksum(new_resource.checksum) if new_resource.checksum
-	end
-	new_resource.updated_by_last_action(a.updated_by_last_action?)
+  plugin_filename = ::File.basename(new_resource.url)
+  Chef::Application.fatal!("Invalid filename extension for Rundeck plugin #{new_resource.name}") \
+    unless ::File.extname(plugin_filename).eql?('.zip') || ::File.extname(plugin_filename).eql?('.jar')
+  a = remote_file "/var/lib/rundeck/libext/#{new_resource.name}" do
+    owner 'rundeck'
+    group 'rundeck'
+    mode 00644
+    action :create
+    source new_resource.url
+    checksum(new_resource.checksum) if new_resource.checksum
+  end
+  new_resource.updated_by_last_action(a.updated_by_last_action?)
 end
 
 action :remove do
-	a = file "/var/lib/rundeck/libext/#{new_resource.name}" do
-		action :delete
-	end
-	new_resource.updated_by_last_action(a.updated_by_last_action?)
+  a = file "/var/lib/rundeck/libext/#{new_resource.name}" do
+    action :delete
+  end
+  new_resource.updated_by_last_action(a.updated_by_last_action?)
 end

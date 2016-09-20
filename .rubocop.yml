@@ -1,0 +1,5 @@
+Metrics/LineLength:
+  Enabled: false
+
+Lint/Eval:
+  Enabled: false

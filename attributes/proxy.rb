@@ -21,4 +21,4 @@
 
 default['rundeck']['proxy']['hostname'] = 'rundeck'
 default['rundeck']['proxy']['srv'] = 'nginx'
-default['rundeck']['proxy']['default']  = false
+default['rundeck']['proxy']['default'] = false

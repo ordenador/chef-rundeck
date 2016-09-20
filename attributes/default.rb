@@ -45,7 +45,7 @@ default['rundeck']['authentication']['file']  = 'jaas-loginmodule.conf'
 default['rundeck']['authentication']['name']  = 'RDpropertyfilelogin'
 
 # Stub config files
-default['rundeck']['stub_config_files'] = %w{ log4j.properties jaas-loginmodule.conf apitoken.aclpolicy admin.aclpolicy }
+default['rundeck']['stub_config_files'] = %w( log4j.properties jaas-loginmodule.conf apitoken.aclpolicy admin.aclpolicy )
 
 # Administrator data bag
 default['rundeck']['admin']['encrypted_data_bag'] = true
@@ -56,15 +56,14 @@ default['rundeck']['admin']['username']           = 'admin'
 default['rundeck']['admin']['password']           = 'a73e319b433528eaa646' # Override this!
 default['rundeck']['admin']['ssh_key']            = ''
 
-
 # Mail data bag
-default['rundeck']['mail']          = {
-	'hostname'		=> 'localhost',
-	'port'     		=> 25,
-	'username' 		=> nil,
-	'password' 		=> nil,
-	'from'     		=> 'ops@example.com',
-	'tls'      		=> false
+default['rundeck']['mail'] = {
+  'hostname'		=> 'localhost',
+  'port'     		=> 25,
+  'username' 		=> nil,
+  'password' 		=> nil,
+  'from'     		=> 'ops@example.com',
+  'tls'      		=> false
 }
 default['rundeck']['mail']['recipients_data_bag'] = 'users'
 default['rundeck']['mail']['recipients_query']    = 'notify:true'
@@ -75,15 +74,15 @@ default['rundeck']['mail']['recipients_field']    = "['email']"
 default['rundeck']['rdbms']['enable'] = false
 
 # Support mysql otherwise Oracle
-default['rundeck']['rdbms']['type'] = "mysql"
-default['rundeck']['rdbms']['location'] = "localhost"
-default['rundeck']['rdbms']['dbname'] = "rundeckdb"
-default['rundeck']['rdbms']['dbuser'] = "rundeckdb"
-default['rundeck']['rdbms']['dbpassword'] = "password"
-default['rundeck']['rdbms']['dialect'] = "Oracle10gDialect"
-default['rundeck']['rdbms']['port'] = "3306"
+default['rundeck']['rdbms']['type'] = 'mysql'
+default['rundeck']['rdbms']['location'] = 'localhost'
+default['rundeck']['rdbms']['dbname'] = 'rundeckdb'
+default['rundeck']['rdbms']['dbuser'] = 'rundeckdb'
+default['rundeck']['rdbms']['dbpassword'] = 'password'
+default['rundeck']['rdbms']['dialect'] = 'Oracle10gDialect'
+default['rundeck']['rdbms']['port'] = '3306'
 
 # Custom properties hashes
-default['rundeck']['custom_properties']['framework'] = Hash.new
-default['rundeck']['custom_properties']['project'] = Hash.new
-default['rundeck']['custom_properties']['global'] = Hash.new
+default['rundeck']['custom_properties']['framework'] = {}
+default['rundeck']['custom_properties']['project'] = {}
+default['rundeck']['custom_properties']['global'] = {}

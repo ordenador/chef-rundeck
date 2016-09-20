@@ -23,21 +23,21 @@ include_recipe 'rundeck'
 
 srv = node['rundeck']['proxy']['srv']
 
-unless %w( nginx openresty ).include?(srv)
-  raise 'Node runlist must include one of nginx or openresty in order to support the rundeck::proxy recipe'
-else
+if %w( nginx openresty ).include?(srv)
   include_recipe srv
+else
+  raise 'Node runlist must include one of nginx or openresty in order to support the rundeck::proxy recipe'
 end
 
 template "#{node[srv]['dir']}/sites-available/rundeck" do
-	source 'nginx_proxy.erb'
-	owner 'root'
-	group 'root'
-	mode 00644
-  variables({ :srv => srv })
-	if(::File.symlink?("#{node[srv]['dir']}/sites-enabled/rundeck"))
-		notifies :reload, 'service[nginx]', :immediately
-	end
+  source 'nginx_proxy.erb'
+  owner 'root'
+  group 'root'
+  mode 00644
+  variables(srv: srv)
+  if ::File.symlink?("#{node[srv]['dir']}/sites-enabled/rundeck")
+    notifies :reload, 'service[nginx]', :immediately
+  end
 end
 
 if srv == 'nginx'

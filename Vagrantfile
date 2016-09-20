@@ -20,7 +20,6 @@
 #
 
 Vagrant.configure('2') do |config|
-
   config.berkshelf.enabled = true
   config.vbguest.no_install = true
 
@@ -57,6 +56,5 @@ Vagrant.configure('2') do |config|
       'recipe[rundeck::chef]',
       'recipe[rundeck::proxy]'
     ]
-
   end
 end
